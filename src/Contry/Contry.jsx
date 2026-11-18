@@ -1,9 +1,21 @@
- import React from 'react';
+ import React, { useState } from 'react';
+ 
+export const Contry = ({ contrys, kipevisitedCountry }) => {
+  const  [visited, setVisited] = useState(false)
 
-export const Contry = ({ contrys }) => {
+   const clickviisited  = () =>{
+    //  setVisited(visited ? false : true)
+     setVisited(!visited)
+     kipevisitedCountry(contrys)
+   }
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col justify-between">
-      
+  <div 
+  className={`rounded-2xl shadow-md p-6 hover:shadow-lg transition-shadow flex flex-col justify-between ${
+    visited 
+      ? "bg-blue-50/30 border-2 border-blue-500 text-blue-900" 
+      : "bg-white border border-gray-200 text-gray-800"
+  }`}
+>     
       <div>
         {/* পতাকার অংশ */}
         <div className="h-40 w-full mb-4 overflow-hidden rounded-xl bg-gray-100">
@@ -20,8 +32,6 @@ export const Contry = ({ contrys }) => {
         </h2>
         <p className="text-sm text-gray-500 mb-4">{contrys.name?.official}</p>
       </div>
-
-      {/* অন্যান্য তথ্য */}
       <div className="text-sm text-gray-600 space-y-1.5 border-t border-gray-100 pt-3">
         <p>
           <strong>Capital:</strong> {
@@ -44,8 +54,11 @@ export const Contry = ({ contrys }) => {
               : contrys.population?.toLocaleString() || "N/A"
           }
         </p>
-      </div>
-      
+      </div> 
+ <button  onClick={clickviisited} className="custom-btn btn-primary">
+        
+        { visited ? "Visited" : "Not visited"}
+      </button>
     </div>
   );
 };
